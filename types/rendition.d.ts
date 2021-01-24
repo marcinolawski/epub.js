@@ -26,6 +26,7 @@ export interface RenditionOptions {
   overflow?: string,
   snap?: boolean | object,
   defaultDirection?: string,
+  afterScrolledTimeout?: number,
 }
 
 export interface DisplayedLocation {
