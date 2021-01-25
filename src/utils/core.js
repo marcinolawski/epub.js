@@ -4,17 +4,33 @@
 */
 import { DOMParser as XMLDOMParser } from "xmldom";
 
-/**
- * Vendor prefixed requestAnimationFrame
- * @returns {function} requestAnimationFrame
- * @memberof Core
- */
-export const requestAnimationFrame = (typeof window != "undefined") ? (window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame) : false;
+
 const ELEMENT_NODE = 1;
 const TEXT_NODE = 3;
 const COMMENT_NODE = 8;
 const DOCUMENT_NODE = 9;
 const _URL = typeof URL != "undefined" ? URL : (typeof window != "undefined" ? (window.URL || window.webkitURL || window.mozURL) : undefined);
+
+let callAsyncFunc = function(callback){
+  window.requestAnimationFrame(callback);
+}
+
+/**
+ * Replace callAsync implementation.
+ * @memberof Core
+ */
+export function replaceCallAsyncFunction(newFunction){
+  callAsyncFunc = newFunction;
+}
+
+/**
+ * Calls a specified function before the next repaint.
+ * @memberof Core
+ */
+export function callAsync(callback){
+  callAsyncFunc(callback);
+}
+
 
 /**
  * Generates a UUID

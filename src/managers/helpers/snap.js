@@ -1,4 +1,4 @@
-import {extend, defer, requestAnimationFrame, prefixed} from "../../utils/core";
+import {extend, defer, callAsync, prefixed} from "../../utils/core";
 import { EVENTS, DOM_EVENTS } from "../../utils/constants";
 import EventEmitter from "event-emitter";
 
@@ -291,7 +291,7 @@ class Snap {
 			}
 
 			if (time < 1) {
-					window.requestAnimationFrame(tick.bind(this));
+					callAsync(tick.bind(this));
 					this.scrollTo(start + ((destination - start) * time), 0);
 			} else {
 					this.scrollTo(destination, 0);

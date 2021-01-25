@@ -1,5 +1,5 @@
 import EventEmitter from "event-emitter";
-import {isNumber, prefixed, borders, defaults} from "./utils/core";
+import {isNumber, prefixed, borders, defaults, callAsync} from "./utils/core";
 import EpubCFI from "./epubcfi";
 import Mapping from "./mapping";
 import {replaceLinks} from "./utils/replacements";
@@ -450,7 +450,7 @@ class Contents {
 		var width, height;
 		// Test size again
 		clearTimeout(this.expanding);
-		requestAnimationFrame(this.resizeCheck.bind(this));
+		callAsync(this.resizeCheck.bind(this));
 		this.expanding = setTimeout(this.resizeListeners.bind(this), 350);
 	}
 
@@ -526,7 +526,7 @@ class Contents {
 	resizeObservers() {
 		// create an observer instance
 		this.observer = new ResizeObserver((e) => {
-			requestAnimationFrame(this.resizeCheck.bind(this));
+			callAsync(this.resizeCheck.bind(this));
 		});
 
 		// pass in the target node

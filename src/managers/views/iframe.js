@@ -1,5 +1,5 @@
 import EventEmitter from "event-emitter";
-import {extend, borders, uuid, isNumber, bounds, defer, createBlobUrl, revokeBlobUrl} from "../../utils/core";
+import {extend, borders, uuid, isNumber, bounds, defer, createBlobUrl, revokeBlobUrl, callAsync} from "../../utils/core";
 import EpubCFI from "../../epubcfi";
 import Contents from "../../contents";
 import { EVENTS } from "../../utils/constants";
@@ -221,7 +221,7 @@ class IframeView {
 			this.lock("both", width, height);
 		} else if(this.settings.axis === "horizontal") {
 			this.lock("height", width, height);
-		} else {			
+		} else {
 			this.lock("width", width, height);
 		}
 
@@ -349,7 +349,7 @@ class IframeView {
 
 		this.pane && this.pane.render();
 
-		requestAnimationFrame(() => {
+		callAsync(() => {
 			let mark;
 			for (let m in this.marks) {
 				if (this.marks.hasOwnProperty(m)) {

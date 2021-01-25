@@ -1,4 +1,4 @@
-import {extend, defer, requestAnimationFrame} from "../../utils/core";
+import {extend, defer} from "../../utils/core";
 import DefaultViewManager from "../default";
 import Snap from "../helpers/snap";
 import { EVENTS } from "../../utils/constants";
@@ -301,11 +301,11 @@ class ContinuousViewManager extends DefaultViewManager {
 		if (end >= contentLength) {
 			append();
 		}
-		
+
 		if (start < 0) {
 			prepend();
 		}
-		
+
 
 		let promises = newViews.map((view) => {
 			return view.display(this.request);
@@ -373,14 +373,14 @@ class ContinuousViewManager extends DefaultViewManager {
 		var bounds = view.bounds();
 
 		this.views.remove(view);
-		
+
 		if(above) {
 			if (this.settings.axis === "vertical") {
 				this.scrollTo(0, prevTop - bounds.height, true);
 			} else {
 				if(this.settings.direction === 'rtl') {
 					if (!this.settings.fullsize) {
-						this.scrollTo(prevLeft, 0, true);					
+						this.scrollTo(prevLeft, 0, true);
 					} else {
 						this.scrollTo(prevLeft + Math.floor(bounds.width), 0, true);
 					}
@@ -410,8 +410,6 @@ class ContinuousViewManager extends DefaultViewManager {
 	addScrollListeners() {
 		var scroller;
 
-		this.tick = requestAnimationFrame;
-
 		let dir = this.settings.direction === "rtl" && this.settings.rtlScrollType === "default" ? -1 : 1;
 
 		this.scrollDeltaVert = 0;
@@ -430,7 +428,6 @@ class ContinuousViewManager extends DefaultViewManager {
 		this._onScroll = this.onScroll.bind(this);
 		scroller.addEventListener("scroll", this._onScroll);
 		this._scrolled = debounce(this.scrolled.bind(this), 30);
-		// this.tick.call(window, this.onScroll.bind(this));
 
 		this.didScroll = false;
 

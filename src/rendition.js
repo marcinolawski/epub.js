@@ -1,5 +1,5 @@
 import EventEmitter from "event-emitter";
-import { extend, defer, isFloat } from "./utils/core";
+import { extend, defer, isFloat, callAsync } from "./utils/core";
 import Hook from "./utils/hook";
 import EpubCFI from "./epubcfi";
 import Queue from "./utils/queue";
@@ -685,7 +685,7 @@ class Rendition {
 	 */
 	reportLocation(){
 		return this.q.enqueue(function reportedLocation(){
-			requestAnimationFrame(function reportedLocationAfterRAF() {
+			callAsync(function reportedLocationAfterRAF() {
 				var location = this.manager.currentLocation();
 				if (location && location.then && typeof location.then === "function") {
 					location.then(function(result) {

@@ -1,4 +1,4 @@
-import {defer, requestAnimationFrame} from "./core";
+import {defer, callAsync} from "./core";
 
 /**
  * Queue for handling tasks one at a time
@@ -9,7 +9,6 @@ class Queue {
 	constructor(context){
 		this._q = [];
 		this.context = context;
-		this.tick = requestAnimationFrame;
 		this.running = false;
 		this.paused = false;
 	}
@@ -126,7 +125,7 @@ class Queue {
 			this.defered = new defer();
 		}
 
-		this.tick.call(window, () => {
+		callAsync(() => {
 
 			if(this._q.length) {
 
