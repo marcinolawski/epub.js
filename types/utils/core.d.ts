@@ -77,3 +77,11 @@ export function getParentByTagName(node: Element, tagname: string): Array<Elemen
 export class RangeObject extends Range {
 
 }
+
+export interface CallAsyncFunction {
+    (callback: FrameRequestCallback): void;
+}
+
+export function callAsync(callback: FrameRequestCallback): void;
+
+export function replaceCallAsyncFunction(newFunction: CallAsyncFunction): void;
