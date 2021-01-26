@@ -15,6 +15,7 @@ export { default as Contents } from './contents';
 export { default as Layout } from './layout';
 export { NavItem } from './navigation';
 export { EVENTS } from './utils/constants';
+export * as utils from './utils/core';
 
 declare namespace ePub {
 

@@ -5,6 +5,7 @@ import Contents from "./contents";
 import Layout from "./layout";
 import ePub from "./epub";
 import { EVENTS } from "./utils/constants";
+import * as utils from "./utils/core";
 
 export default ePub;
 export {
@@ -14,4 +15,5 @@ export {
 	Contents,
 	Layout,
 	EVENTS,
+	utils
 };
